@@ -6,6 +6,8 @@ import TripSearch from './tripsearch/TripSearch';
 import TripsContext from './TripsContext';
 import SavedTrips from './SavedTrips/SavedTrips';
 import ResultsPage from './resultspage/ResultsPage';
+import SaveForm from './saveform/SaveForm';
+import TRIPS from './trips';
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +17,16 @@ class App extends Component {
       error: null,
     }
   }
+
+  componentDidMount() {
+    this.setState({
+      trips: TRIPS
+    })
+  }
+
   render() {
     const contextValue = {
-      trips: this.state.notes,
+      trips: this.state.trips,
     }
     return (
       <div className='App'>
@@ -44,6 +53,10 @@ class App extends Component {
             <Route
               path='/resultspage'
               component={ResultsPage}
+            />
+            <Route
+              path='/saveform'
+              component={SaveForm}
             />
           </TripsContext.Provider>
         </main>

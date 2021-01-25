@@ -8,7 +8,7 @@ class ResultsPage extends Component {
                     Results
       </h3>
                 <section>
-                    <ul class="group">
+                    <ul className="group">
                         <li>
                             <h3>Option #1</h3>
                             <p>Location: city, state</p>
@@ -42,11 +42,17 @@ class ResultsPage extends Component {
                             <p>Location: city, state</p>
                             <p>Driving Time: 15 mins</p>
                             <p>Description: The best place!</p>
-                            <button> Save Trip </button>
+                            <button
+                            className="save-button"
+                            onClick={() => this.props.history.push('/saveform')}
+                            > Save Trip </button>
                         </li>
                     </ul>
                 </section>
-                <button>Go Back</button>
+                <button
+                className="back-button"
+                onClick={() => this.props.history.goBack()}
+                >Go Back</button>
             </div>
         )
     }
