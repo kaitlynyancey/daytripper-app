@@ -1,18 +1,55 @@
 import React, { Component } from 'react';
+import TripsContext from '../TripsContext';
 
 class SaveForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            id: '',
+            name: "",
+            location: "",
+
+        }
+    }
+    static contextType = TripsContext;
+
+    componentDidMount() {
+        const tripId = this.props.match.params.tripId
+        const trip = this.context.results.find(itm => itm.place_id === tripId)
+        this.setState({
+            id: tripId,
+            name: trip.name,
+            location: trip.vicinity
+        })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault()
+        const newTrip = {
+            id: this.state.id,
+            name: e.target.name.value,
+            location: e.target.location.value,
+            notes: e.target.notes.value,
+            rating: e.target.rating.value,
+        }
+        this.context.addTrip(newTrip)
+        this.props.history.push('/savedtrips')
+    }
+
     render() {
         return (
             <div className='save-form'>
                 <h3>Save this Trip?</h3>
-                <form>
+                <form
+                    className='save-form'
+                    onSubmit={this.handleSubmit}>
                     <div>
                         <label htmlFor="name">Name:</label>
-                        <input type="text" name="name" id="name" defaultValue="Option #1" /><br />
+                        <input type="text" name="name" id="name" defaultValue={this.state.name} /><br />
                     </div>
                     <div>
                         <label htmlFor="location">Location:</label>
-                        <input type="text" name="location" id="location" defaultValue="City, State" /><br />
+                        <input type="text" name="location" id="location" defaultValue={this.state.location} /><br />
                     </div>
                     <div>
                         <label htmlFor="notes">Trip Notes:</label>
@@ -31,13 +68,12 @@ class SaveForm extends Component {
                     </div>
                     <br />
                     <button type="submit"
-                    className="submit-button"
-                    onClick={() => this.props.history.goBack()}
+                        className="submit-button"
                     >Submit / Save</button>
                     <button
-                    className="back-button"
-                    onClick={() => this.props.history.goBack()}
-                    > Go Back</button>
+                        className="back-button"
+                        onClick={() => this.props.history.goBack()}
+                    > Cancel</button>
                 </form>
             </div>
         )

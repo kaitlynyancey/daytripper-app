@@ -14,7 +14,7 @@ class SavedTrips extends Component {
                     <ul className='trip-list'>
                         {trips.map(trip => 
                             <TripItem 
-                                key={trip.id}
+                                id={trip.id}
                                 {...trip}
                             />)}
                     </ul>

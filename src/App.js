@@ -14,8 +14,27 @@ class App extends Component {
     super(props);
     this.state = {
       trips: [],
+      results: [],
       error: null,
     }
+  }
+
+  updateResults = results => {
+    this.setState({
+      results: results
+    })
+  }
+
+  addTrip = newTrip => {
+    this.state.trips.push(newTrip)
+  }
+
+  deleteTrip = tripId => {
+    const newTrips = this.state.trips.filter(trip => 
+      trip.id !== tripId)
+      this.setState({
+        trips: newTrips
+      })
   }
 
   componentDidMount() {
@@ -27,6 +46,10 @@ class App extends Component {
   render() {
     const contextValue = {
       trips: this.state.trips,
+      results: this.state.results,
+      updateResults: this.updateResults,
+      addTrip: this.addTrip,
+      deleteTrip: this.deleteTrip,
     }
     return (
       <div className='App'>
@@ -55,7 +78,7 @@ class App extends Component {
               component={ResultsPage}
             />
             <Route
-              path='/saveform'
+              path='/save/:tripId'
               component={SaveForm}
             />
           </TripsContext.Provider>
