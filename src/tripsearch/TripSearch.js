@@ -24,7 +24,7 @@ class TripSearch extends Component {
         e.preventDefault()
         const location = e.target.location.value
         const category = e.target.category.value
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDuMDBiIOYB65fuCyPStR1vL6HHvlTd06Y&address=${location}`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${config.MAPS_API_KEY}&address=${location}`)
             .then(res => {
                 if (!res.ok) {
                     // get the error message from the response,
@@ -47,7 +47,7 @@ class TripSearch extends Component {
 
     handleSearch(lat, lng, category) {
         const proxy = `https://cors-anywhere.herokuapp.com/`
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBW4Nxxm_Zxvgyspb4DXQN5Z2mKJ7YdD54&location=${lat},${lng}&radius=50000&type=${category}`
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${config.MAPS_API_KEY}&location=${lat},${lng}&radius=50000&type=${category}`
         fetch(proxy + url)
             .then(res => {
                 if (!res.ok) {
@@ -118,6 +118,7 @@ class TripSearch extends Component {
                                 name={result.name}
                                 location={result.vicinity}
                                 onSave={this.handleSave}
+                                img={result.photos}
                             />)}
                     </ul>
                 </div>
