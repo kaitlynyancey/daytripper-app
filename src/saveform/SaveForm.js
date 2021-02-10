@@ -8,7 +8,7 @@ class SaveForm extends Component {
             id: '',
             name: "",
             location: "",
-
+            mapUrl: "",
         }
     }
     static contextType = TripsContext;
@@ -19,7 +19,9 @@ class SaveForm extends Component {
         this.setState({
             id: tripId,
             name: trip.name,
-            location: trip.vicinity
+            location: trip.vicinity,
+            mapUrl:`https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_KEY}
+        &q=place_id:${tripId}`
         })
     }
 
@@ -37,8 +39,19 @@ class SaveForm extends Component {
     }
 
     render() {
+        
         return (
-            <div className='save-form'>
+            <div className='save-page'>
+                <div>
+                    <h3>{this.state.name}</h3>
+                    <iframe
+                        title="map"
+                        width="600"
+                        height="450"
+                        frameborder="0" style={{border:0}}
+                        src={this.state.mapUrl} allowfullscreen>
+                    </iframe>
+                </div>
                 <h3>Save this Trip?</h3>
                 <form
                     className='save-form'

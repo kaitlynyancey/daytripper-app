@@ -7,6 +7,7 @@ class SavedTrips extends Component {
 
     render() {
         const { trips } = this.context
+        console.log(this.context.trips)
         return (
             <div className='saved-trips'>
                 <h3>Your Trip Diary</h3>

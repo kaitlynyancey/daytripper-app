@@ -7,7 +7,6 @@ import TripsContext from './TripsContext';
 import SavedTrips from './SavedTrips/SavedTrips';
 import ResultsPage from './resultspage/ResultsPage';
 import SaveForm from './saveform/SaveForm';
-import TRIPS from './trips';
 
 
 class App extends Component {
@@ -36,12 +35,6 @@ class App extends Component {
       this.setState({
         trips: newTrips
       })
-  }
-
-  componentDidMount() {
-    this.setState({
-      trips: TRIPS
-    })
   }
 
   render() {
