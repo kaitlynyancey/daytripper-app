@@ -12,7 +12,7 @@ class ResultItem extends Component {
     componentDidMount() {
         if (this.props.img[0].photo_reference) {
             const img_ref = this.props.img[0].photo_reference;
-            const img_url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${img_ref}&key=${process.env.REACT_APP_API_KEY}`;
+            const img_url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${img_ref}&key=${process.env.REACT_APP_PLACES_KEY}`;
             this.setState({
                 img_url
             })

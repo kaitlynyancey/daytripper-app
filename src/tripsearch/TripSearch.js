@@ -32,7 +32,7 @@ class TripSearch extends Component {
         })
         const location = e.target.location.value
         const category = e.target.category.value
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_API_KEY}&address=${location}`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_PLACES_KEY}&address=${location}`)
             .then(res => {
                 if (!res.ok) {
                     // get the error message from the response,
@@ -54,8 +54,8 @@ class TripSearch extends Component {
     }
 
     handleSearch(lat, lng, category) {
-        const proxy = `https://cors-anywhere.herokuapp.com/`
-        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.REACT_APP_API_KEY}&location=${lat},${lng}&radius=50000&type=${category}`
+        const proxy = ` https://murmuring-scrubland-19112.herokuapp.com/`
+        const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.REACT_APP_PLACES_KEY}&location=${lat},${lng}&radius=50000&type=${category}`
         fetch(proxy + url)
             .then(res => {
                 if (!res.ok) {

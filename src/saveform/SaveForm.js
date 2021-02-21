@@ -35,7 +35,7 @@ class SaveForm extends Component {
             rating: e.target.rating.value,
         }
         this.context.addTrip(newTrip)
-        this.props.history.push('/savedtrips')
+        this.props.history.push('/tripsearch')
     }
 
     render() {
@@ -48,8 +48,8 @@ class SaveForm extends Component {
                         title="map"
                         width="600"
                         height="450"
-                        frameborder="0" style={{border:0}}
-                        src={this.state.mapUrl} allowfullscreen>
+                        frameBorder="0" style={{border:0}}
+                        src={this.state.mapUrl} allowFullScreen>
                     </iframe>
                 </div>
                 <h3>Save this Trip?</h3>
