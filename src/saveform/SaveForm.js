@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TripsContext from '../TripsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkedAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 class SaveForm extends Component {
     constructor(props) {

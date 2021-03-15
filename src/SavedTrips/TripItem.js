@@ -43,7 +43,7 @@ class TripItem extends Component {
                     <li key={this.props.id} className="box saved-item grow">
                         <h3>{this.props.name}</h3>
                         <br />
-                        <p>{pin} Location: <a href={mapURL} target='_blank'>{this.props.location}</a></p>
+                        <p>{pin} Location: <a href={mapURL} target="_blank" rel="noreferrer">{this.props.location}</a></p>
                         <br />
                         <p>{pen} Notes: {this.props.notes}</p>
                         <br />
