@@ -5,7 +5,6 @@ import Nav from './nav/Nav';
 import TripSearch from './tripsearch/TripSearch';
 import TripsContext from './TripsContext';
 import SavedTrips from './SavedTrips/SavedTrips';
-import ResultsPage from './resultspage/ResultsPage';
 import SaveForm from './saveform/SaveForm';
 
 
@@ -94,10 +93,7 @@ render() {
         }
   return(
     <div className = 'App' >
-      <header className="group">
-        <section>
-          <h1>Day Tripper</h1>
-        </section>
+      <header>
         <Nav />
       </header>
       <main>
@@ -113,10 +109,6 @@ render() {
           <Route
             path='/savedtrips'
             component={SavedTrips}
-          />
-          <Route
-            path='/resultspage'
-            component={ResultsPage}
           />
           <Route
             path='/save/:tripId'

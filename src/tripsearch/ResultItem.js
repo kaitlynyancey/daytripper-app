@@ -21,13 +21,15 @@ class ResultItem extends Component {
 
     render() {
         return (
-            <li key={this.props.id}>
+            <li key={this.props.id} className="box result-item grow">
                 <h3>{this.props.name}</h3>
                 <p>Location: {this.props.location}</p>
+                
+                <br />
+                <img src={this.state.img_url} alt={this.props.name} />
                 <button
                     onClick={() => this.props.onSave(this.props.id)}
-                > Save Trip </button>
-                <img src={this.state.img_url} alt={this.props.name} />
+                > More Details</button>
             </li>
 
         )

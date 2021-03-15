@@ -9,16 +9,22 @@ class SavedTrips extends Component {
         const { trips } = this.context
         return (
             <div className='saved-trips'>
-                <h3>Your Trip Diary</h3>
+                <div className='center'>
+                    <h2>Your Trip Diary</h2>
+                </div>
+                <br />
                 <section>
-                    <ul className='trip-list'>
-                        {trips.map(trip => 
-                            <TripItem 
+                    <ul className='trip-list group-results'>
+                        {trips.map(trip =>
+                            <TripItem
                                 id={trip.id}
                                 {...trip}
                             />)}
                     </ul>
                 </section>
+                <div className="center">
+                    <img src="https://media.giphy.com/media/ZdsGIDYgc2eJAXNukB/giphy.gif" alt="Van driving GIF" />
+                </div>
             </div>
         )
     }

@@ -8,6 +8,7 @@ class TripSearch extends Component {
     state = {
         results: [],
         error: null,
+        searchMessage: null,
     };
 
     componentDidMount() {
@@ -19,7 +20,7 @@ class TripSearch extends Component {
         this.props.history.push(`/save/${tripId}`)
     }
 
-    handleReset(){
+    handleReset() {
         this.setState({
             results: [],
         })
@@ -29,6 +30,7 @@ class TripSearch extends Component {
         e.preventDefault()
         this.setState({
             results: [],
+            searchMessage: <div className="wrapper"><h2>Searching, please wait...</h2></div>,
         })
         const location = e.target.location.value
         const category = e.target.category.value
@@ -69,7 +71,8 @@ class TripSearch extends Component {
             })
             .then(data => {
                 this.setState({
-                    results: data.results
+                    results: data.results,
+                    searchMessage: null,
                 })
                 this.context.updateResults(data.results)
             })
@@ -82,59 +85,71 @@ class TripSearch extends Component {
     render() {
         return (
             <div className='trip-search'>
-                <h3>
-                    Where should we go today?
-                </h3>
-                <form
-                    className='trip-search-form'
-                    onSubmit={this.handleSubmit}>
-                    <div>
-                        <label htmlFor="location">Location:</label><br />
-                        <input type="text" id="location" name="location" required /><br />
-                    </div>
-                    <div>
-                        <p> Category (please select one):</p>
-                        <input type="radio" id="museum" name="category" value="museum" />
-                        <label htmlFor="museum"> Museum </label><br />
-                        <input type="radio" id="park" name="category" value="park" />
-                        <label htmlFor="park"> Park </label><br />
-                        <input type="radio" id="tourist_attraction" name="category" value="tourist_attraction" />
-                        <label htmlFor="tourist_attraction"> Tourist Attraction </label><br />
-                        <input type="radio" id="zoo" name="category" value="zoo" />
-                        <label htmlFor="zoo"> Zoo </label><br />
-                        <input type="radio" id="shopping_mall" name="category" value="shopping_mall" />
-                        <label htmlFor="shopping_mall"> Shopping Mall </label><br />
-                        <input type="radio" id="movie_theater" name="category" value="movie_theater" />
-                        <label htmlFor="movie_theater"> Movie Theater </label><br />
-                        <input type="radio" id="amusement_park" name="category" value="amusement_park" />
-                        <label htmlFor="amusement_park"> Amusement Park </label><br />
-                        <input type="radio" id="stadium" name="category" value="stadium" />
-                        <label htmlFor="stadium"> Stadium </label><br />
-                        <input type="radio" id="campground" name="category" value="campground" />
-                        <label htmlFor="campground"> Campground </label><br />
-                    </div>
-                    <div>
-                        <button type="submit"
-                            className="search-button"
-                        >Let's Go!</button>
-                        <button type="reset"
-                            onClick={() => this.handleReset()}>
-                            Reset
-                        </button>
-                    </div>
-                </form>
+                <section className="wrapper box" >
+                    <h3>
+                        Where should we go today?
+                    </h3>
+                    <p>
+                        Please enter in your location and choose one category from the drop down list. Then hit the "Let's Go!" button to complete your search. You can click the "more details" button on any of the results for more information.
+                    </p>
+                    <br />
+                    <form
+                        className='trip-search-form'
+                        onSubmit={this.handleSubmit}>
+                        <div>
+                            <label htmlFor="location">My Location:   </label>
+                            <input type="text" id="location" name="location" required /><br />
+                        </div>
+                        <div>
+                            <label htmlFor="category">Category:    </label>
+                            <select name="category" id="category" required>
+                                <option value="tourist_attraction" default>Tourist Attraction</option>
+                                <option value="museum" default>Museum</option>
+                                <option value="park" default>Park</option>
+                                <option value="zoo" default>Zoo</option>
+                                <option value="stadium" default>Stadium/Sports Arena</option>
+                                <option value="shopping_mall" default>Shopping Mall</option>
+                                <option value="restaurant" default>Restaurant</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div>
+                            <button type="submit"
+                                className="search-button"
+                            >Let's Go!</button>
+                            <button type="reset"
+                                onClick={() => this.handleReset()}>
+                                Reset
+                                </button>
+                        </div>
+                    </form>
+                </section>
+
                 <div className='results'>
-                    <h3>Here are your results:</h3>
-                    <ul className='results-list'>
-                        {this.state.results.map(result =>
-                            <ResultItem
-                                id={result.place_id}
-                                name={result.name}
-                                location={result.vicinity}
-                                onSave={this.handleSave}
-                                img={result.photos}
-                            />)}
-                    </ul>
+                    {this.state.searchMessage}
+                    {this.state.results.length > 0 &&
+                        <>
+                            <br />
+                            <div className='wrapper'>
+                                <h2>Here are your results:</h2>
+                            </div>
+                            <br />
+                            <div className="results-wrapper">
+                                <ul className='results-list group-results'>
+                                    {this.state.results.map(result =>
+                                        <ResultItem
+                                            id={result.place_id}
+                                            name={result.name}
+                                            location={result.vicinity}
+                                            onSave={this.handleSave}
+                                            img={result.photos}
+                                        />)}
+                                </ul>
+                            </div>
+                        </>}
+                    <div className="center">
+                        <img src="https://media.giphy.com/media/35RaQ1bNf70zzLoTCM/giphy.gif" alt="Spinning car GIF" />
+                    </div>
                 </div>
             </div>
         );
