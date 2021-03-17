@@ -5,8 +5,9 @@ class ResultItem extends Component {
         img: [{ photo_reference: "" }]
     }
 
+    //default image for location if none exists in google maps database
     state = {
-        img_url: 'https://img.icons8.com/clouds/100/000000/no-image.png',
+        img_url: "https://img.icons8.com/clouds/100/000000/no-image.png",
     };
 
     componentDidMount() {

@@ -16,16 +16,20 @@ class TripSearch extends Component {
             results: this.context.results
         })
     }
+
+    //route to the save page when the trip button is clicked
     handleSave = tripId => {
         this.props.history.push(`/save/${tripId}`)
     }
 
+    //refresh the results and search parameters
     handleReset() {
         this.setState({
             results: [],
         })
     }
 
+    //when the search form is submitted, fetch location's lat and long coordinates from google maps API
     handleSubmit = e => {
         e.preventDefault()
         this.setState({
@@ -48,6 +52,7 @@ class TripSearch extends Component {
             .then(data => {
                 const lat = data.results[0].geometry.location.lat;
                 const lng = data.results[0].geometry.location.lng;
+                //call the handleSearch function to use the coordinates provided to perform places search
                 this.handleSearch(lat, lng, category)
             })
             .catch(error => {
@@ -55,6 +60,7 @@ class TripSearch extends Component {
             })
     }
 
+    //use the google maps places API endpoint to fetch locations based on lat and long coordinates of the inputted destination
     handleSearch(lat, lng, category) {
         const proxy = ` https://murmuring-scrubland-19112.herokuapp.com/`
         const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${process.env.REACT_APP_PLACES_KEY}&location=${lat},${lng}&radius=50000&type=${category}`
@@ -84,7 +90,7 @@ class TripSearch extends Component {
 
     render() {
         return (
-            <div className='trip-search'>
+            <div className="trip-search">
                 <section className="wrapper box" >
                     <h3>
                         Where should we go today?
@@ -94,7 +100,7 @@ class TripSearch extends Component {
                     </p>
                     <br />
                     <form
-                        className='trip-search-form'
+                        className="trip-search-form"
                         onSubmit={this.handleSubmit}>
                         <div>
                             <label htmlFor="location">My Location:   </label>
@@ -125,17 +131,17 @@ class TripSearch extends Component {
                     </form>
                 </section>
 
-                <div className='results'>
+                <div className="results">
                     {this.state.searchMessage}
                     {this.state.results.length > 0 &&
                         <>
                             <br />
-                            <div className='wrapper'>
+                            <div className="wrapper">
                                 <h2>Here are your results:</h2>
                             </div>
                             <br />
                             <div className="results-wrapper">
-                                <ul className='results-list group-results'>
+                                <ul className="results-list group-results">
                                     {this.state.results.map(result =>
                                         <ResultItem
                                             id={result.place_id}

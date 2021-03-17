@@ -4,6 +4,8 @@ import TripsContext from '../TripsContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPencilAlt, faSmile } from '@fortawesome/free-solid-svg-icons';
 
+
+//function to delete trip item from saved trip database
 function handleClickDelete(tripId, callback) {
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips/${tripId}`, {
         method: 'DELETE',
@@ -31,10 +33,12 @@ class TripItem extends Component {
     static contextType = TripsContext
 
     render() {
+        //create variables for icons used
         const pin = <FontAwesomeIcon icon={faMapMarkerAlt} />
         const pen = <FontAwesomeIcon icon={faPencilAlt} />
         const smile = <FontAwesomeIcon icon={faSmile} />
 
+        //create URL for the specific location with google maps search query
         const mapURL = `https://www.google.com/maps/search/?api=1&query=${this.props.location}`
 
         return (

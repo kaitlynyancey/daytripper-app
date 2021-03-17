@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import HomePage from './homepage/HomePage';
 import Nav from './nav/Nav';
 import TripSearch from './tripsearch/TripSearch';
@@ -18,12 +18,14 @@ class App extends Component {
     }
   }
 
+  //function to update trip results when search form is submitted
   updateResults = results => {
     this.setState({
       results: results
     })
   }
 
+  //function to update the trips database when a new trip is saved by user
   addTrip = newTrip => {
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips`, {
       method: 'POST',
@@ -49,12 +51,13 @@ class App extends Component {
       })
   }
 
+  //function to delete a trip from the trips database
   deleteTrip = tripId => {
     const newTrips = this.state.trips.filter(trip =>
       trip.id !== tripId)
-      this.setState({
-        trips: newTrips
-      })
+    this.setState({
+      trips: newTrips
+    })
   }
 
   componentDidMount() {
@@ -81,51 +84,55 @@ class App extends Component {
       .catch(error => {
         this.setState({ error })
       })
-    }
+  }
 
-render() {
-        const contextValue = {
-          trips: this.state.trips,
-          results: this.state.results,
-          updateResults: this.updateResults,
-          addTrip: this.addTrip,
-          deleteTrip: this.deleteTrip,
-        }
-  return(
-    <div className = 'App' >
-      <header>
-        <Nav />
-      </header>
-      <main>
+  render() {
+    //update trip context
+    const contextValue = {
+      trips: this.state.trips,
+      results: this.state.results,
+      updateResults: this.updateResults,
+      addTrip: this.addTrip,
+      deleteTrip: this.deleteTrip,
+    }
+    return (
+      <BrowserRouter>
         <TripsContext.Provider value={contextValue}>
-          <Route
-            exact path='/'
-            component={HomePage}
-          />
-          <Route
-            path='/tripsearch'
-            component={TripSearch}
-          />
-          <Route
-            path='/savedtrips'
-            component={SavedTrips}
-          />
-          <Route
-            path='/save/:tripId'
-            component={SaveForm}
-          />
-        </TripsContext.Provider>
-      </main>
-      <footer>
-        <p>
+          <div className='App' >
+            <header>
+              <Nav />
+            </header>
+            <main>
+              <Route
+                exact path='/'
+                component={HomePage}
+              />
+              <Route
+                path='/tripsearch'
+                component={TripSearch}
+              />
+              <Route
+                path='/savedtrips'
+                component={SavedTrips}
+              />
+              <Route
+                path='/save/:tripId'
+                component={SaveForm}
+              />
+
+            </main>
+            <footer>
+              <p>
                 Created by Kaitlyn Yancey
           </p>
-        <p>
-          <small>&copy; Copyright 2021. All Rights Reserved</small>
-        </p>
-      </footer>
-    </div>
-  );
+              <p>
+                <small>&copy; Copyright 2021. All Rights Reserved</small>
+              </p>
+            </footer>
+          </div>
+        </TripsContext.Provider>
+      </BrowserRouter>
+    );
   }
 }
 

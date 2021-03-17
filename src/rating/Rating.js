@@ -1,6 +1,7 @@
 import React from 'react';
 import './Rating.css';
 
+//function to generate star rating
 export default function Rating(props) {
   const stars = [0, 0, 0, 0, 0].map((_, i) =>
     (i < props.value)

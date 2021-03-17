@@ -7,26 +7,31 @@ class SaveForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
+            id: "",
             name: "",
             location: "",
             mapUrl: "",
         }
     }
+
     static contextType = TripsContext;
 
     componentDidMount() {
-        const tripId = this.props.match.params.tripId
-        const trip = this.context.results.find(itm => itm.place_id === tripId)
-        this.setState({
-            id: tripId,
-            name: trip.name,
-            location: trip.vicinity,
-            mapUrl: `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_KEY}
-        &q=place_id:${tripId}`
-        })
+        if (this.props.match) {
+            const tripId = this.props.match.params.tripId
+            const trip = this.context.results.find(itm => itm.place_id === tripId)
+
+            this.setState({
+                id: tripId,
+                name: trip.name,
+                location: trip.vicinity,
+                mapUrl: `https://www.google.com/maps/embed/v1/place?key=${process.env.REACT_APP_MAPS_KEY}
+                &q=place_id:${tripId}`
+            })
+        }
     }
 
+    //when form is submitted, update the newTrip object with the inputted values, then pass the newTrip object to the addTrip function to save the trip
     handleSubmit = e => {
         e.preventDefault()
         const newTrip = {
@@ -37,21 +42,22 @@ class SaveForm extends Component {
             rating: e.target.rating.value,
         }
         this.context.addTrip(newTrip)
+        //return to the search results page after form is submitted
         this.props.history.push('/tripsearch')
     }
 
     render() {
-    const pin = <FontAwesomeIcon icon={faMapMarkerAlt} />
+        const pin = <FontAwesomeIcon icon={faMapMarkerAlt} />
 
         return (
-            <div className='save-page'>
+            <div className="save-page">
                 <div className="center">
                     <h2>{pin} {this.state.name}</h2>
                 </div>
                 <br />
                 <div className="wrapper box">
                     <form
-                        className='save-form'
+                        className="save-form"
                         onSubmit={this.handleSubmit}>
                         <h3>Save this Trip?</h3>
                         <div>
@@ -70,8 +76,8 @@ class SaveForm extends Component {
                         <div>
                             <label htmlFor="rating">Rating (between 1 to 5 stars): </label>
                             <select
-                                name='rating'
-                                id='rating'
+                                name="rating"
+                                id="rating"
                                 required
                             >
                                 <option value="1">1</option>
@@ -81,15 +87,15 @@ class SaveForm extends Component {
                                 <option value="5">5</option>
                             </select>
                         </div>
-                        
+
                         <button type="submit"
                             className="submit-button"
                         >Submit / Save</button>
-                        <button
+                    </form>
+                    <button
                             className="back-button"
                             onClick={() => this.props.history.goBack()}
                         > Cancel</button>
-                    </form>
                 </div>
                 <br />
                 <div className="center">

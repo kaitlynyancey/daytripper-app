@@ -8,13 +8,13 @@ class SavedTrips extends Component {
     render() {
         const { trips } = this.context
         return (
-            <div className='saved-trips'>
-                <div className='center'>
+            <div className="saved-trips">
+                <div className="center">
                     <h2>Your Trip Diary</h2>
                 </div>
                 <br />
                 <section>
-                    <ul className='trip-list group-results'>
+                    <ul className="trip-list group-results">
                         {trips.map(trip =>
                             <TripItem
                                 id={trip.id}

@@ -66,8 +66,6 @@ section{
   flex-wrap: wrap;
 }
 
-
-
 .group-left{
   display: flex;
   flex-direction: row;
@@ -132,6 +130,9 @@ button{
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+  -webkit-transition: background-color 500ms;
+  -moz-transition: background-color 500ms;
+  -o-transition: background-color 500ms;
   transition: background-color 500ms;
 }
 
@@ -182,14 +183,14 @@ input{
 }
 
 @media all and (min-width: 600px) {
-  p, a{
-    font-size: 18px;
+  p, a, button, label{
+    font-size: 20px;
   }
   h2{
-    font-size: 28px;;
+    font-size: 30px;;
   }
   h3{
-    font-size: 22px;
+    font-size: 25px;
   }
   img{
     max-width: 300px;
@@ -236,11 +237,11 @@ input{
   }
 
   h1{
-    font-size: 70px;
+    font-size: 80px;
   }
   .grow:hover{
-        -webkit-transform: scale(1.2);
-        -ms-transform: scale(1.2);
-        transform: scale(1.2);
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
   }
 }

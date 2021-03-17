@@ -12,34 +12,34 @@ export default function Nav() {
     const car = <FontAwesomeIcon icon={faCar} />
 
     return (
-        <div className="group-header">
-            <h1>Day Tripper</h1>
-            <nav className="group-nav">
-                <div>
-                    <span>
-                        {car}
-                    </span>
-                    <Link to='/'>
-                        About
+            <div className="group-header">
+                <h1>Day Tripper</h1>
+                <nav className="group-nav">
+                    <div>
+                        <span>
+                            {car}
+                        </span>
+                        <Link to='/'>
+                            About
                     </Link>
-                </div>
-                <div>
-                    <span>
-                        {search}
-                    </span>
-                    <Link to='tripsearch'>
-                        Explore
+                    </div>
+                    <div>
+                        <span>
+                            {search}
+                        </span>
+                        <Link to='tripsearch'>
+                            Explore
                     </Link>
-                </div>
-                <div>
-                    <span>
-                        {map}
-                    </span>
-                    <Link to='/savedtrips'>
-                        Saved Trips
+                    </div>
+                    <div>
+                        <span>
+                            {map}
+                        </span>
+                        <Link to='/savedtrips'>
+                            Saved Trips
                     </Link>
-                </div>
-            </nav>
-        </div>
+                    </div>
+                </nav>
+            </div>
     )
 } 
