@@ -5,7 +5,7 @@ This app lets you search nearby attractions and points of interest to plan out y
 
 ### Link to Day Tripper Live App: [https://daytripper-app.vercel.app/](https://daytripper-app.vercel.app/)
 ### Link to Day Tripper API Repository: [https://github.com/kaitlynyancey/daytripper-api](https://github.com/kaitlynyancey/daytripper-api)
-- Documentation of the Daytripper API endpoints can be found in the README file in the repository. 
+- Documentation of the API endpoints can be found in the README file in the Day Tripper API repository. 
 ___
 ## Screenshots:
 
